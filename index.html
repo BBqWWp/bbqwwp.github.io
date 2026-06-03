@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dev Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: #060606; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 8vh;
+    padding-bottom: 5vh;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(34,197,94,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    color: #f0f0f0;
+  }
+  .hero h1 .glow-green {
+    color: #22c55e;
+    text-shadow: 0 0 20px rgba(34,197,94,0.8), 0 0 40px rgba(34,197,94,0.5), 0 0 80px rgba(34,197,94,0.3);
+  }
+  .arrow {
+    margin-top: 3rem;
+    color: #444;
+    font-size: 28px;
+    animation: bounce 2s ease-in-out infinite;
+    display: inline-block;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(12px); opacity: 1; }
+  }
+
+  .columns-section {
+    padding: 3vh 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .columns {
+    display: flex;
+    gap: 2rem;
+    max-width: 860px;
+    width: 100%;
+    justify-content: center;
+  }
+  .col {
+    flex: 1;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  .col .icon { font-size: 26px; margin-bottom: 0.8rem; }
+  .col h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #22c55e;
+    margin-bottom: 0.6rem;
+    text-shadow: 0 0 10px rgba(34,197,94,0.5);
+  }
+  .col p { font-size: 13px; color: #666; line-height: 1.6; }
+
+  .cta-section {
+    padding: 5vh 2rem 8vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .tagline {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(18px, 3vw, 28px);
+    font-weight: 500;
+    line-height: 1.8;
+    max-width: 680px;
+    color: #888;
+    margin-bottom: 3rem;
+  }
+  .tagline .glow-white { color: #fff; text-shadow: 0 0 15px rgba(255,255,255,0.7), 0 0 30px rgba(255,255,255,0.4); }
+  .tagline .glow-red { color: #ff4444; text-shadow: 0 0 15px rgba(255,68,68,0.8), 0 0 30px rgba(255,68,68,0.5), 0 0 60px rgba(255,68,68,0.3); }
+  .tagline .glow-green2 { color: #22c55e; text-shadow: 0 0 15px rgba(34,197,94,0.9), 0 0 30px rgba(34,197,94,0.6), 0 0 60px rgba(34,197,94,0.3); }
+
+  .btn-row { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; justify-content: center; }
+
+  .tg-btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: transparent; color: #22c55e;
+    font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 500;
+    padding: 16px 36px; border-radius: 12px; border: 1.5px solid #22c55e;
+    cursor: pointer; text-decoration: none; transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(34,197,94,0.3), 0 0 30px rgba(34,197,94,0.15);
+  }
+  .tg-btn:hover { background: rgba(34,197,94,0.08); box-shadow: 0 0 25px rgba(34,197,94,0.5), 0 0 50px rgba(34,197,94,0.3); transform: translateY(-2px); }
+  .tg-btn svg { width: 22px; height: 22px; fill: #22c55e; filter: drop-shadow(0 0 6px rgba(34,197,94,0.8)); }
+
+  .stay-btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: transparent; color: #ff4444;
+    font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 500;
+    padding: 16px 36px; border-radius: 12px; border: 1.5px solid #ff4444;
+    cursor: pointer; transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(255,68,68,0.3), 0 0 30px rgba(255,68,68,0.15);
+  }
+  .stay-btn:hover { background: rgba(255,68,68,0.08); box-shadow: 0 0 25px rgba(255,68,68,0.5), 0 0 50px rgba(255,68,68,0.3); transform: translateY(-2px); }
+
+  .form-wrap {
+    display: none;
+    margin-top: 2.5rem;
+    width: 100%;
+    max-width: 500px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,68,68,0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: left;
+  }
+  .form-wrap.visible { display: block; }
+  .form-wrap h3 { font-family: 'Syne', sans-serif; font-size: 18px; color: #ff4444; margin-bottom: 1.5rem; text-shadow: 0 0 10px rgba(255,68,68,0.5); }
+  .form-wrap input, .form-wrap select, .form-wrap textarea {
+    width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; padding: 12px 14px; color: white;
+    font-family: 'Inter', sans-serif; font-size: 14px; margin-bottom: 1rem; outline: none; transition: border 0.2s;
+  }
+  .form-wrap input:focus, .form-wrap select:focus, .form-wrap textarea:focus { border-color: #ff4444; }
+  .form-wrap select option { background: #111; }
+  .form-wrap textarea { resize: vertical; min-height: 100px; }
+  .form-wrap button {
+    width: 100%; background: transparent; color: #ff4444; border: 1.5px solid #ff4444;
+    border-radius: 10px; padding: 13px; font-family: 'Inter', sans-serif;
+    font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.3s;
+    box-shadow: 0 0 15px rgba(255,68,68,0.2);
+  }
+  .form-wrap button:hover { background: rgba(255,68,68,0.08); box-shadow: 0 0 25px rgba(255,68,68,0.4); }
+
+  /* SUCCESS */
+  .success-wrap {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 2rem;
+    animation: fadeIn 0.5s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .checkmark-circle {
+    width: 74px; height: 74px;
+    border-radius: 50%;
+    border: 3px solid #22c55e;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 0 20px rgba(34,197,94,0.5), 0 0 40px rgba(34,197,94,0.2);
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  @keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    70% { transform: scale(1.15); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .checkmark-circle svg {
+    width: 36px; height: 36px;
+    stroke: #22c55e; fill: none;
+    stroke-width: 3; stroke-linecap: round; stroke-linejoin: round;
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    animation: drawCheck 0.4s ease 0.3s forwards;
+  }
+  @keyframes drawCheck {
+    to { stroke-dashoffset: 0; }
+  }
+  .success-title {
+    font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700;
+    color: #22c55e; text-shadow: 0 0 12px rgba(34,197,94,0.5);
+    margin-bottom: 0.4rem;
+  }
+  .success-sub { font-size: 13px; color: #555; }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <h1>Make your own <span class="glow-green">product!</span></h1>
+  <span class="arrow">↓</span>
+</section>
+
+<section class="columns-section">
+  <div class="columns">
+    <div class="col">
+      <div class="icon">⚙️</div>
+      <h3>From simple to complex</h3>
+      <p>We can build anything — from a basic calculator to full-featured applications tailored to your needs.</p>
+    </div>
+    <div class="col">
+      <div class="icon">💰</div>
+      <h3>Lowest prices around</h3>
+      <p>We offer the most competitive rates on the market — quality work without breaking the bank.</p>
+    </div>
+    <div class="col">
+      <div class="icon">🤖</div>
+      <h3>Our bot will guide you</h3>
+      <p>Our Telegram bot will walk you through the entire process — fast, easy, and stress-free.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <p class="tagline">
+    We can help you! Make your own <span class="glow-white">site</span>,
+    <span class="glow-red">telegram bot</span> or even
+    <span class="glow-green2">SOFTWARE!</span>
+  </p>
+
+  <div class="btn-row">
+    <a class="tg-btn" href="https://t.me/Coding_for_you_bot" target="_blank">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/>
+      </svg>
+      Let's do it in Telegram!
+    </a>
+    <button class="stay-btn" onclick="toggleForm()">✉️ Stay Here</button>
+  </div>
+
+  <div class="form-wrap" id="formWrap">
+    <h3>📋 Tell us about your project</h3>
+    <form id="contactForm" action="https://formspree.io/f/mqeokegg" method="POST">
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="email" name="email" placeholder="Your email" required>
+      <select name="product">
+        <option value="" disabled selected>What do you need?</option>
+        <option value="Website">🌐 Website</option>
+        <option value="Telegram Bot">🤖 Telegram Bot</option>
+        <option value="Software">💻 Software</option>
+      </select>
+      <textarea name="description" placeholder="Describe your project in detail..."></textarea>
+      <button type="submit">Send request →</button>
+    </form>
+    <div class="success-wrap" id="successWrap">
+      <div class="checkmark-circle">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <p class="success-title">Request sent!</p>
+      <p class="success-sub">We'll get back to you as soon as possible.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  function toggleForm() {
+    document.getElementById('formWrap').classList.toggle('visible');
+  }
+
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const data = new FormData(this);
+    const res = await fetch(this.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      this.style.display = 'none';
+      const sw = document.getElementById('successWrap');
+      sw.style.display = 'flex';
+    }
+  });
+</script>
+
+</body>
+</html>
